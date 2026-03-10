@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NUNEZ SENSI</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0a0a0a;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+h1{
+color:#00ffcc;
+}
+
+.box{
+background:#1b1b1b;
+padding:20px;
+border-radius:10px;
+margin:20px auto;
+max-width:500px;
+box-shadow:0 0 15px #00ffcc;
+}
+
+select,button{
+width:90%;
+padding:10px;
+margin:10px;
+border-radius:8px;
+border:none;
+font-size:16px;
+}
+
+button{
+background:#00ffcc;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+.pix{
+background:#111;
+padding:10px;
+border-radius:8px;
+}
+
+.copy{
+background:#00ffcc;
+color:black;
+padding:8px;
+border-radius:5px;
+}
+
+.visitas{
+margin-top:10px;
+color:#aaa;
+}
+
+</style>
+</head>
+<body>
+
+<h1>NUNEZ SENSI</h1>
+
+<div class="box">
+
+<h3>Escolha a marca</h3>
+
+<select id="marca">
+
+<option>Samsung</option>
+<option>Xiaomi</option>
+<option>Motorola</option>
+<option>Apple</option>
+<option>Realme</option>
+<option>Oppo</option>
+<option>Vivo</option>
+<option>Huawei</option>
+<option>Infinix</option>
+<option>Tecno</option>
+<option>LG</option>
+<option>Asus</option>
+<option>Nokia</option>
+<option>Lenovo</option>
+<option>Sony</option>
+<option>Google</option>
+<option>Honor</option>
+<option>ZTE</option>
+<option>OnePlus</option>
+<option>TCL</option>
+
+</select>
+
+<h3>Escolha o modelo</h3>
+
+<select id="modelo"></select>
+
+<button onclick="verificar()">VER SENSIBILIDADE</button>
+
+<div id="resultado"></div>
+
+</div>
+
+
+<div class="box">
+
+<h3>PAGAMENTO</h3>
+
+<p>PIX:</p>
+
+<div class="pix">
+
+<span id="pix">66981124524</span>
+
+<br><br>
+
+<button class="copy" onclick="copiar()">COPIAR PIX</button>
+
+</div>
+
+<br>
+
+<a href="https://wa.me/5566981124524">
+
+<button>FALAR NO WHATSAPP</button>
+
+</a>
+
+</div>
+
+<div class="visitas">
+
+Visitantes: <span id="contador"></span>
+
+</div>
+
+
+<script>
+
+
+let celulares={
+
+Samsung:["Galaxy A10","Galaxy A20","Galaxy A30","Galaxy A50","Galaxy A51","Galaxy A52","Galaxy A71","Galaxy S10","Galaxy S20","Galaxy S21","Galaxy S22","Galaxy S23"],
+
+Xiaomi:["Redmi 9","Redmi 9A","Redmi 10","Redmi 10C","Redmi Note 9","Redmi Note 10","Redmi Note 11","Redmi Note 12","Redmi Note 13","Poco X3","Poco X5"],
+
+Motorola:["Moto G7","Moto G8","Moto G9","Moto G20","Moto G30","Moto G31","Moto G41","Moto G51","Moto G52","Moto G60"],
+
+Apple:["iPhone 7","iPhone 8","iPhone X","iPhone XR","iPhone 11","iPhone 12","iPhone 13","iPhone 14","iPhone 15"],
+
+Realme:["Realme C11","Realme C21","Realme C25","Realme 7","Realme 8","Realme 9","Realme 10"],
+
+Oppo:["Oppo A15","Oppo A31","Oppo A53","Oppo A54","Oppo Reno 5","Oppo Reno 6"],
+
+Vivo:["Vivo Y11","Vivo Y12","Vivo Y20","Vivo Y21","Vivo V20"],
+
+Huawei:["Huawei P20","Huawei P30","Huawei P40","Huawei Mate 20","Huawei Y9"],
+
+Infinix:["Hot 8","Hot 9","Hot 10","Note 8","Note 10"],
+
+Tecno:["Spark 6","Spark 7","Spark 8","Camon 16","Camon 18"],
+
+LG:["LG K10","LG K11","LG K40","LG K51"],
+
+Asus:["Zenfone 5","Zenfone 6","Zenfone 7","ROG Phone 3"],
+
+Nokia:["Nokia 3.4","Nokia 5.3","Nokia 6.1","Nokia 7.2"],
+
+Lenovo:["Lenovo K5","Lenovo K6","Lenovo Z5"],
+
+Sony:["Xperia XA","Xperia XZ","Xperia XZ1","Xperia 1"],
+
+Google:["Pixel 4","Pixel 5","Pixel 6","Pixel 7"],
+
+Honor:["Honor 8X","Honor 9X","Honor 10","Honor 20"],
+
+ZTE:["Blade A3","Blade A5","Blade V10"],
+
+OnePlus:["OnePlus 7","OnePlus 8","OnePlus 9","OnePlus 10"],
+
+TCL:["TCL 10","TCL 20","TCL 30"]
+
+}
+
+
+function atualizarModelos(){
+
+let marca=document.getElementById("marca").value
+let modelo=document.getElementById("modelo")
+
+modelo.innerHTML=""
+
+celulares[marca].forEach(m=>{
+
+let op=document.createElement("option")
+op.text=m
+modelo.add(op)
+
+})
+
+}
+
+document.getElementById("marca").addEventListener("change",atualizarModelos)
+
+atualizarModelos()
+
+
+function verificar(){
+
+let nivel=["COMUM","MÉDIO","AVANÇADO"]
+
+let escolha=nivel[Math.floor(Math.random()*3)]
+
+let preco=""
+
+if(escolha=="COMUM"){preco="R$ 3,50"}
+if(escolha=="MÉDIO"){preco="R$ 7,00"}
+if(escolha=="AVANÇADO"){preco="R$ 10,00"}
+
+document.getElementById("resultado").innerHTML=
+"<h2>"+escolha+"</h2><h3>Preço: "+preco+"</h3>"
+
+}
+
+
+function copiar(){
+
+navigator.clipboard.writeText("66981124524")
+
+alert("PIX COPIADO")
+
+}
+
+
+let visitas=localStorage.getItem("visitas")
+
+if(visitas==null){
+visitas=0
+}
+
+visitas++
+
+localStorage.setItem("visitas",visitas)
+
+document.getElementById("contador").innerText=visitas
+
+
+</script>
+
+</body>
+</html>
+
+  
